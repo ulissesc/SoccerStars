@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:ucf="http://www.uconstantini/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template.xhtml">
+<ui:param name="ativePage" value="criarTimes"/> 
+
+	<ui:define name="corpo">
+		
+	<p:outputLabel id="jogadorDialogPanel">
+	<p:dialog modal="true" widgetVar="jogadorDialog" header="Jogador" width="400">
+      
+       <div class="form-actions">
+	        <h:form styleClass="form-horizontal">
+	        
+	        	<div class="control-group">
+		        	<h:inputText value="#{jogadoresBean.jogador.nome}" id="nome" required="true" styleClass="input-block-level"/>
+		        	<p:watermark value="Nome" for="nome"/>
+		        	<h:message for="nome"/>
+				</div>
+		        
+		        <div class="control-group">
+		        	<h:selectOneMenu value="#{jogadoresBean.jogador.posicao}" required="true"  id="posicao" styleClass="input-block-level">
+		        		<f:selectItem itemValue="D" itemLabel="Defesa"/>
+		        		<f:selectItem itemValue="M" itemLabel="Meia"/>
+		        		<f:selectItem itemValue="A" itemLabel="Ataque"/>
+		        	</h:selectOneMenu>
+		        	<h:message for="posicao"/>
+				</div>
+				
+				<div class="control-group">
+		        	<h:outputLabel value="Habilidade" for="habilidade"/>
+		         	<p:rating value="#{jogadoresBean.jogador.habilidade}"  id="habilidade"/>
+		        	<h:message for="habilidade"/>
+				</div>
+				
+				<div class="control-group">
+		        	<h:outputLabel value="Condicionamento" for="condicionamento"/>
+		         	<p:rating value="#{jogadoresBean.jogador.condicionamento}"  id="condicionamento"/>
+		        	<h:message for="condicionamento"/>
+		        </div>
+		        
+		        <div class="control-group">
+			        <h:commandButton value="Salvar" styleClass="btn btn-large btn-info btn-block" action="#{jogadoresBean.salvarJogador}">
+			        </h:commandButton>
+		        </div>
+	        	
+	        </h:form>
+	     </div>
+      </p:dialog>
+      </p:outputLabel>
+		
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h2>Jogadores</h2>
+        <p class="lead">Adicione e selecione os jogadores que farão parte da partida</p>
+      </div>
+
+      <h:form prependId="false">
+      
+      <div class="clearfix well">
+      
+      	<h:commandButton value="Adicionar Jogador" styleClass="btn btn-info pull-left" action="#{jogadoresBean.carregarJogador()}">
+      		<p:ajax update="multiJogadores :jogadorDialogPanel" oncomplete="jogadorDialog.show()"/>
+      	</h:commandButton>
+      	
+      	<h:commandButton value="Separar times" styleClass="btn btn-warning pull-right" action="#{jogadoresBean.separarTimes}">
+      	</h:commandButton>
+      	
+      </div>
+      
+       <p:dataTable id="multiJogadores" var="jogador" widgetVar="multiJogadoresWG" value="#{jogadoresBean.jogadoresDataModel}" paginator="false"   
+                 selection="#{jogadoresBean.selectedJogador}" filteredValue="#{jogadoresBean.jogadoresFiltrados}">  
+  
+  		<f:facet name="header">  
+            <p:outputPanel layout="block" styleClass="clearfix">  
+                <p:inputText id="globalFilter"  styleClass="pull-right" onkeyup="multiJogadoresWG.filter()" style="width:150px" />  
+            </p:outputPanel>  
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Nome"  filterBy="#{jogador.nome}" filterMatchMode="contains" filterStyle="display: none" >  
+            #{jogador.nome}  
+            <br/>
+            <p:rating value="#{jogador.mediaAproximada}" readonly="true" /> 
+        </p:column>  
+        <p:column headerText="Posição" style="width: 1px;" styleClass="text-center">
+        	<h:outputText value="A" title="Ataque" rendered="#{jogador.posicao eq 'A'}" styleClass="badge badge-success"/>
+        	<h:outputText value="M" title="Meia" rendered="#{jogador.posicao eq 'M'}" styleClass="badge"/>
+        	<h:outputText value="D" title="Defesa" rendered="#{jogador.posicao eq 'D'}" styleClass="badge badge-warning"/>
+        </p:column>
+      
+        <p:column headerText="Editar" style="width: 1px;">  
+			<h:commandButton styleClass="btn-small btn-info" value="Editar" action="#{jogadoresBean.carregarJogador( jogador.id )}">
+				<p:ajax update="multiJogadores :jogadorDialogPanel" oncomplete="jogadorDialog.show()"/>
+			</h:commandButton>            
+        </p:column>  
+        </p:dataTable>
+        
+		
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

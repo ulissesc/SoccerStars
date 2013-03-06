@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/prettyfaces/3.3.3" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/prettyfaces/3.3.3
+               http://ocpsoft.org/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
+
+	<url-mapping id="index">
+		<pattern value="/" />
+		<view-id value="/index.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="criarPartida">
+		<pattern value="/criarPartida" />
+		<view-id value="/criarPartida.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="finalizarCriacao">
+		<pattern value="/inalizarCriacao" />
+		<view-id value="/inalizarCriacao.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="partida">
+		<pattern value="/partida/#{id}" />
+		<view-id value="/partidaGerada.jsf" />
+	</url-mapping>
+
+	<url-mapping id="sobre">
+		<pattern value="/sobre" />
+		<view-id value="/sobre.jsf" />
+	</url-mapping>
+
+</pretty-config>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:ucf="http://www.uconstantini/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+<ui:composition template="/template.xhtml">
+<ui:param name="ativePage" value="home"/>
+
+	<ui:define name="corpo">
+	
+	
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>FutebaStars</h1>
+        <p class="lead">a forma mais simples e divertida de controlar suas partidas</p>
+        
+        <c:if test="#{not empty loginBean.usuarioLogado}">
+        	<a class="btn btn-large btn-success" href="#{RAIZ_PROJETO}/criarPartida">Começe agora</a>
+        </c:if>
+        <c:if test="#{empty loginBean.usuarioLogado}">
+        	<a class="btn btn-large btn-success" href="javascript:cadastroDialog.show()">Cadastre-se agora</a>
+        </c:if>
+        
+      </div>
+
+
+ 
+ <p:dialog modal="true" widgetVar="cadastroDialog" header="Cadastre-se" width="360">
+     
+				<h:form>
+
+		        	<h:inputText value="#{loginBean.usuario.nome}" label="Nome" styleClass="input-block-level" id="nome" required="true"/>
+		        	<p:watermark value="Nome" for="nome"/>
+		        	<h:message for="nome"/>
+
+		        	<h:inputText value="#{loginBean.usuario.email}" label="E-mail" styleClass="input-block-level" id="email" required="true"
+		        	validatorMessage="E-mail inválido">
+		        		<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+		        	</h:inputText>
+		        	<p:watermark value="E-mail" for="email"/>
+		        	<h:message for="email"/>
+
+		        	<h:inputSecret value="#{loginBean.usuario.senha}" label="Senha" styleClass="input-block-level" id="senha" required="true"/>
+		        	<p:watermark value="Senha" for="senha"/>
+		        	<h:message for="senha"/>
+
+
+ 				<h:commandButton value="Criar usuário" styleClass="btn btn-large btn-success btn-block" action="#{loginBean.criarUsuario}">
+		        </h:commandButton>
+		        
+				</h:form>
+ </p:dialog>
+		
+	</ui:define>
+</ui:composition>
+</html>

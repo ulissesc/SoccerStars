@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:ucf="http://www.uconstantini/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template.xhtml">
+
+
+<ui:param name="ativePage" value="criarTimes"/> 
+
+	<ui:define name="corpo">
+		
+		<h:form>
+		
+		<fieldset class="form-horizontal">
+    	<legend>Dados da Partida</legend>
+    	
+    	<div class="input-prepend">
+			<p:outputLabel value="Local" for="local"/>
+			<h:inputText value="#{partidaBean.local}" label="Local" id="local" styleClass="input-xlarge"/>
+	    	<p:watermark value="Local" for="local"/>
+	    </div>
+	      	
+	    <div class="input-prepend">
+		  	<p:outputLabel value="Data e Hora" for="dataHora"/>
+	      	<p:calendar value="#{partidaBean.dataHora}" pattern="dd/MM/yyyy HH:mm" label="Data e Hora" id="dataHora" styleClass="input-medium"/>
+   		   	<p:watermark value="Data e Hora" for="dataHora"/>
+		</div>	
+		</fieldset>
+		
+		<div class="page-header text-center">
+			
+				 
+		</div>
+
+      	<div class="row">
+		  <div class="span5 text-center">
+			<p:outputPanel id="timeA" >
+			<p:dataTable var="jogador" value="#{partidaBean.partida.timeA.jogadores}" paginator="false">
+ 				<p:column>  
+		            #{jogador.nome}  
+		        </p:column>  
+	        </p:dataTable>
+	        
+	        <h3>
+			  	<small>média  </small>
+			  		<h:outputText value="#{partidaBean.partida.timeA.mediaGeral}" >
+			  		<f:convertNumber minFractionDigits="2" maxFractionDigits="2"/> 
+			  		</h:outputText>
+			 </h3>
+			  
+	        </p:outputPanel>
+	        		  
+		  </div>
+
+		  <div class="span2 text-center"><h1><i>vs</i></h1></div>
+
+		  <div class="span5 text-center">
+		  	<p:outputPanel id="timeB" >
+			  	<p:dataTable var="jogador" value="#{partidaBean.partida.timeB.jogadores}" paginator="false">  
+			        <p:column>  
+			            #{jogador.nome}  
+			        </p:column>  
+		        </p:dataTable>
+	        </p:outputPanel>
+	        
+		  <h3>
+		  	<small>média  </small>
+		  		<h:outputText value="#{partidaBean.partida.timeB.mediaGeral}" >
+		  		<f:convertNumber minFractionDigits="2" maxFractionDigits="2"/> 
+		  		</h:outputText>
+		  </h3>
+		  
+	        
+		  </div>
+		</div>
+		
+		<div class="well clearfix">
+		
+		<h:commandButton value="Regerar" styleClass="btn btn-warning pull-left" action="#{partidaBean.regerarPartida}"/>
+		<h:commandButton value="Finalizar" styleClass="btn btn-primary pull-right" action="#{partidaBean.finalizar}"/>
+		
+		</div>
+		
+		</h:form>
+	
+	</ui:define>
+	
+	
+</ui:composition>
+</html>

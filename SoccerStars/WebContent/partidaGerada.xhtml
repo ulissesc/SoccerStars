@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:ucf="http://www.uconstantini/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template.xhtml">
+
+
+<f:metadata>
+	<f:viewParam name="id" value="#{partidaPublicaBean.idPartida}" />
+</f:metadata>
+
+	<ui:define name="corpo">
+		
+
+		<div class="page-header text-center">
+			<h1><small>local </small><h:outputText value="#{partidaPublicaBean.partida.local}"/></h1>
+  			<h3>
+  			<small>data e hora </small>
+            <h:outputText value="#{partidaPublicaBean.partida.dataHora}">
+       			<f:convertDateTime pattern="dd/MMM/yyyy HH:mm:ss"/>
+       		</h:outputText>
+       		
+  			</h3>
+		</div>
+
+    
+      	<h:form>
+      	<div class="row">
+		  <div class="span5 text-center">
+			
+			<p:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeA.jogadores}" paginator="false">  
+		        <p:column>  
+		            #{jogador.nome}  
+		        </p:column>  
+	        </p:dataTable>
+	        		  
+		  </div>
+
+		  <div class="span2 text-center"><h1><i>vs</i></h1></div>
+
+		  <div class="span5 text-center">
+		  	<p:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeB.jogadores}" paginator="false">  
+		        <p:column >  
+		            #{jogador.nome}  
+		        </p:column>  
+	        </p:dataTable>
+		  </div>
+		</div>
+		
+		</h:form>
+	
+		<a name="fb_share"></a>
+		<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+		
+	</ui:define>
+	
+	
+</ui:composition>
+</html>
