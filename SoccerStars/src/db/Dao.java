@@ -51,6 +51,8 @@ public class Dao<T extends Entity> {
 	}
 	
 	public ObjectSet<T> findAll(String orderBy, boolean asc){
+		if (!DB.getDb().equals(clazz))
+			return null;
 		Query query = DB.getDb().query();
 		query.constrain(clazz);
 		
