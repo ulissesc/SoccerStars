@@ -66,9 +66,11 @@
       
       <div class="clearfix well">
       
-      	<h:commandButton value="Adicionar Jogador" styleClass="btn btn-info pull-left" action="#{jogadoresBean.carregarJogador()}">
+      	<h:commandButton value="Adicionar Jogador" styleClass="btn btn-info" action="#{jogadoresBean.carregarJogador()}">
       		<p:ajax update="multiJogadores :jogadorDialogPanel" oncomplete="jogadorDialog.show()"/>
       	</h:commandButton>
+      	
+      	<BUTTON type="button" onclick="partidasGeradasWG.show()" class="btn">Partidas Geradas</BUTTON>
       	
       	<h:commandButton value="Separar times" styleClass="btn btn-warning pull-right" action="#{jogadoresBean.separarTimes}">
       	</h:commandButton>
@@ -102,9 +104,29 @@
 				<p:ajax update="multiJogadores :jogadorDialogPanel" oncomplete="jogadorDialog.show()"/>
 			</h:commandButton>
 			<h:outputText value=" | "/>   
-			<h:commandButton styleClass="btn-small btn-danger" value="Excluir" action="#{jogadoresBean.excluirJogador( jogador.id )}"/>
+			<h:commandButton styleClass="btn-small btn-danger" value="Excluir" title="Excluir" action="#{jogadoresBean.excluirJogador( jogador.id )}">
+			</h:commandButton>
         </p:column>  
         </p:dataTable>
+        
+        
+        <p:dialog header="Partidas geradas" modal="true" widgetVar="partidasGeradasWG" width="400">
+        	<p:dataTable id="partidasGeradas" var="partida" value="#{jogadoresBean.partidasGeradas}" rows="5">
+       	 	
+       	 	<p:column headerText="Local">  
+            	<h:outputText value="#{empty partida.local ? ' -- ' : partida.local}"/>  
+        	</p:column>
+        	<p:column headerText="Data/Hora">  
+            	<h:outputText value="#{partida.dataHora}">
+            		<f:convertDateTime pattern="dd/MMM/yyyy HH:mm:ss"/>
+            	</h:outputText>  
+        	</p:column>  
+       	 	<p:column headerText="Data/Hora">
+       	 		<a href="#{RAIZ_PROJETO}/partida/#{partida.id}">abrir</a>
+       	 	</p:column>
+       		</p:dataTable>
+       		  
+        </p:dialog>
         
 		</h:form>
 		

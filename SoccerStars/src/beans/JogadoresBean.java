@@ -107,5 +107,13 @@ public class JogadoresBean {
 		this.jogadoresFiltrados = jogadoresFiltrados;
 	}
 	
+	public List<Partida> getPartidasGeradas(){
+		Long idUsuario = SecurityContext.getIdUsuario();
+		if (idUsuario == null){
+			JsfUtil.addErrorMessage("Nenhum usuário logado");
+			return null;
+		}
+		return Partida.dao().findByUsuario(idUsuario);
+	}
 
 }
