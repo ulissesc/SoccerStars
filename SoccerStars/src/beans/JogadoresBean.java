@@ -107,7 +107,7 @@ public class JogadoresBean {
 		this.jogadoresFiltrados = jogadoresFiltrados;
 	}
 	
-	public List<Partida> getPartidasGeradas(){
+	public List<Partida> getPartidasGeradas(){ 
 		Long idUsuario = SecurityContext.getIdUsuario();
 		if (idUsuario == null){
 			JsfUtil.addErrorMessage("Nenhum usuário logado");
