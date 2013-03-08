@@ -7,5 +7,5 @@ Projeto criado para auxíliar a separação dos times nos seus confrontos futebo
 
 
 Foi utilizado neste projeto:
-  DB4O
-  JSF
+  - DB4O
+  - JSF 
