@@ -30,6 +30,17 @@
         
       </div>
 
+	<hr/>
+		
+	<h:dataTable value="#{loginBean.ultimasPartidas}" var="partida">
+		<h:column>
+			local <h:outputText value="#{partida.local}"/>
+		</h:column>
+		<h:column>
+			<a href="#{RAIZ_PROJETO}/partida/#{partida.id}">Visualizar</a>
+		</h:column>
+	</h:dataTable>
+		
 
  
  <p:dialog modal="true" widgetVar="cadastroDialog" header="Cadastre-se" width="360">
@@ -57,6 +68,7 @@
 		        
 				</h:form>
  </p:dialog>
+		
 		
 	</ui:define>
 </ui:composition>

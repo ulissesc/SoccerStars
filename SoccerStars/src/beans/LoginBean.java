@@ -5,6 +5,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import com.db4o.ObjectSet;
+
+import model.Partida;
 import model.Usuario;
 import security.SecurityContext;
 import utils.JsfUtil;
@@ -69,5 +72,13 @@ public class LoginBean {
 		
 		return null;
 	}
-	
+
+	public List<Partida> getUltimasPartidas(){
+		ObjectSet<Partida> objectSet = Partida.dao().findAll("id", false);
+		
+		if (objectSet.size() > 10)
+			return objectSet.subList(0,10);
+		
+		return objectSet;
+	}
 }
