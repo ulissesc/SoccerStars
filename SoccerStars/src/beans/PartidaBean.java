@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.DragDropEvent;
 
+import security.SecurityContext;
 import utils.CriadorDeTimes;
 import utils.JsfUtil;
 
@@ -39,6 +40,7 @@ public class PartidaBean {
 		
 		getPartida().setLocal(local);
 		getPartida().setDataHora(dataHora);
+		getPartida().setIdUsuario(SecurityContext.getIdUsuario());
 		Partida.dao().save(getPartida());
 		
 		return "/partidaGerada.jsf?id="+getPartida().getId()+"&faces-redirect=true";
