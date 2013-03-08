@@ -31,13 +31,14 @@
       </div>
 
 	<hr/>
+	<h3>últimos confrontos</h3>
 		
-	<h:dataTable value="#{loginBean.ultimasPartidas}" var="partida">
+	<h:dataTable value="#{loginBean.ultimasPartidas}" var="partida" styleClass="table table-striped">
 		<h:column>
-			local <h:outputText value="#{partida.local}"/>
+			<small>local </small> <h:outputText value="#{partida.local}"/> <h:outputText value=" -- " rendered="#{empty partida.local}"/>
 		</h:column>
 		<h:column>
-			<a href="#{RAIZ_PROJETO}/partida/#{partida.id}">Visualizar</a>
+			<a href="#{RAIZ_PROJETO}/partida/#{partida.id}">abrir</a>
 		</h:column>
 	</h:dataTable>
 		

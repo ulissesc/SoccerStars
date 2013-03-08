@@ -71,6 +71,12 @@ public class JogadoresBean {
 			jogador = Jogador.dao().load(idJogador);
 		return null;
 	}
+	
+	public String excluirJogador(Long idJogador){
+		Jogador.dao().delete(idJogador);
+		JsfUtil.addSuccessMessage("Jogador excluído.");
+		return null;
+	}
 
 	public Jogador[] getSelectedJogador() {
 		return selectedJogador;

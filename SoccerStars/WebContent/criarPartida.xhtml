@@ -100,14 +100,13 @@
         <p:column headerText="Editar" style="width: 1px;">  
 			<h:commandButton styleClass="btn-small btn-info" value="Editar" action="#{jogadoresBean.carregarJogador( jogador.id )}">
 				<p:ajax update="multiJogadores :jogadorDialogPanel" oncomplete="jogadorDialog.show()"/>
-			</h:commandButton>            
+			</h:commandButton>
+			<h:outputText value=" | "/>   
+			<h:commandButton styleClass="btn-small btn-danger" value="Excluir" action="#{jogadoresBean.excluirJogador( jogador.id )}"/>
         </p:column>  
         </p:dataTable>
         
-		
 		</h:form>
-		
-		
 		
 	</ui:define>
 </ui:composition>
