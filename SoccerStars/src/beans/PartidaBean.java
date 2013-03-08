@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.DragDropEvent;
 
-import util.CriadorDeTimes;
+import utils.CriadorDeTimes;
 import utils.JsfUtil;
 
 import model.Jogador;

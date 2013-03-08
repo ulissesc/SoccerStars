@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="pt_BR"
     xmlns:f="http://java.sun.com/jsf/core" 
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets" >
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
     
     <ui:param name="RAIZ_PROJETO" value="#{facesContext.externalContext.requestContextPath}"/>
@@ -72,7 +73,6 @@
       .navbar .nav {
         margin: 0;
         display: table;
-        width: 100%;
       }
       .navbar .nav li {
         display: table-cell;
@@ -104,20 +104,19 @@
 
   <div class="container">
 
-      <div class="masthead">
-        
-        
-        <div class="masthead">
+      <div>
+       
+        <div class="clearfix">
 	        
-	        <p:outputPanel rendered="#{empty loginBean.usuarioLogado}" >
+	        <c:if test="#{empty loginBean.usuarioLogado}">
 	        <ul class="nav nav-pills pull-right">
 	        <li>
 				<BUTTON class="btn btn-info" onclick="loginDialog.show()">Entrar</BUTTON>
 			</li>
 			</ul>
-			</p:outputPanel>
+			</c:if>
 			
-			<p:outputPanel rendered="#{not empty loginBean.usuarioLogado}" styleClass="pull-right">
+			<c:if test="#{not empty loginBean.usuarioLogado}">
 			<ul class="nav nav-pills pull-right">
 				<li>
 				<h:form>
@@ -127,20 +126,19 @@
 				</h:form>
 				</li>
 			</ul>
-			</p:outputPanel>
+			</c:if>
+			
 
         	<h3 class="muted">FutebaStars</h3>
       	</div>
         
         <div class="navbar">
           <div class="navbar-inner">
-            <div class="container">
               <ul class="nav">
                 <li class="#{ ativePage eq 'home' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/">Inicio</a></li>
                 <li class="#{ ativePage eq 'criarTimes' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/criarPartida">Criar Times</a></li>
                 <li class="#{ ativePage eq 'sobre' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/sobre">Sobre</a></li>
               </ul>
-            </div>
           </div>
         </div><!-- /.navbar -->
       </div>

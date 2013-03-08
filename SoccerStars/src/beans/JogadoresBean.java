@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import model.Jogador;
 import model.Partida;
 import security.SecurityContext;
-import util.CriadorDeTimes;
+import utils.CriadorDeTimes;
 import utils.JsfUtil;
 
 @ManagedBean

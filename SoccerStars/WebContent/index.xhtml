@@ -19,10 +19,10 @@
       <!-- Jumbotron -->
       <div class="jumbotron">
         <h1>FutebaStars</h1>
-        <p class="lead">a forma mais simples e divertida de controlar suas partidas</p>
+        <p class="lead">a forma mais simples de criar times para suas peladas</p>
         
         <c:if test="#{not empty loginBean.usuarioLogado}">
-        	<a class="btn btn-large btn-success" href="#{RAIZ_PROJETO}/criarPartida">Começe agora</a>
+        	<a class="btn btn-large btn-info" href="#{RAIZ_PROJETO}/criarPartida">Começe agora</a>
         </c:if>
         <c:if test="#{empty loginBean.usuarioLogado}">
         	<a class="btn btn-large btn-success" href="javascript:cadastroDialog.show()">Cadastre-se agora</a>

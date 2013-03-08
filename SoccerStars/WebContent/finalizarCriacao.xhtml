@@ -32,18 +32,14 @@
    		   	<p:watermark value="Data e Hora" for="dataHora"/>
 		</div>	
 		</fieldset>
-		
-		<div class="page-header text-center">
+		<br/>
 			
-				 
-		</div>
-
       	<div class="row">
-		  <div class="span5 text-center">
+		  <div class="span4 text-center">
 			<p:outputPanel id="timeA" >
 			<p:dataTable var="jogador" value="#{partidaBean.partida.timeA.jogadores}" paginator="false">
  				<p:column>  
-		            #{jogador.nome}  
+		            #{jogador.nomeCapitalizado}  
 		        </p:column>  
 	        </p:dataTable>
 	        
@@ -60,11 +56,11 @@
 
 		  <div class="span2 text-center"><h1><i>vs</i></h1></div>
 
-		  <div class="span5 text-center">
+		  <div class="span4 text-center">
 		  	<p:outputPanel id="timeB" >
 			  	<p:dataTable var="jogador" value="#{partidaBean.partida.timeB.jogadores}" paginator="false">  
 			        <p:column>  
-			            #{jogador.nome}  
+			            #{jogador.nomeCapitalizado}  
 			        </p:column>  
 		        </p:dataTable>
 	        </p:outputPanel>
