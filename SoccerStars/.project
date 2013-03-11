@@ -3,7 +3,6 @@
 	<name>SoccerStars</name>
 	<comment></comment>
 	<projects>
-		<project>SoccerStars-Lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
