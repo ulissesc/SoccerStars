@@ -122,5 +122,19 @@ public class TestDb4Object {
 		}
 	}
 	
+	@Test
+	public void uniqueIDJogadores(){
+		
+		ObjectSet<Jogador> result = Jogador.dao().findAll();
+		for (Jogador jogador2 : result) {
+			long id = DB.getDb().ext().getID(jogador2);
+			System.out.println( "ID: " + id );
+			
+			Jogador jogadorFromDB = (Jogador) DB.getDb().ext().getByID(id);
+			System.out.println("NOME: " + jogadorFromDB.getNome());
+		}
+		
+	}
+	
 
 }
