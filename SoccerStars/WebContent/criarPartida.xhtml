@@ -62,7 +62,7 @@
         <p class="lead">Adicione e selecione os jogadores que farão parte da partida</p>
       </div>
 
-      <h:form prependId="false">
+      <h:form  id="formJogadores">
       
       <div class="clearfix well">
       
@@ -76,10 +76,19 @@
       	</h:commandButton>
       	
       </div>
+      <div>
+      	<h3>
+	      	<small>total de jogadores </small>
+	      	<h:outputText value="#{jogadoresBean.totalJogadoresSelecionados}" id="totalJogadoresSelecionados"/>
+      	</h3>
+      </div>
       
        <p:dataTable id="multiJogadores" var="jogador" widgetVar="multiJogadoresWG" value="#{jogadoresBean.jogadoresDataModel}" paginator="false"   
-                 selection="#{jogadoresBean.selectedJogador}" filteredValue="#{jogadoresBean.jogadoresFiltrados}">  
+                 selection="#{jogadoresBean.selectedJogador}" filteredValue="#{jogadoresBean.jogadoresFiltrados}" >  
   
+  		<p:ajax event="rowSelectCheckbox" update=":formJogadores:totalJogadoresSelecionados" process="@this" partialSubmit="true"/>
+  		<p:ajax event="rowUnselectCheckbox" update=":formJogadores:totalJogadoresSelecionados" process="@this" partialSubmit="true"/>
+
   		<f:facet name="header">  
             <p:outputPanel layout="block" styleClass="clearfix">  
                 <p:inputText id="globalFilter"  styleClass="pull-right" onkeyup="multiJogadoresWG.filter()" style="width:150px" />  

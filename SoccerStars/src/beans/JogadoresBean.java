@@ -115,5 +115,11 @@ public class JogadoresBean {
 		}
 		return Partida.dao().findByUsuario(idUsuario);
 	}
+	
+	public Integer getTotalJogadoresSelecionados(){
+		if (getSelectedJogador() == null)
+			return 0;
+		return getSelectedJogador().length;
+	}
 
 }
