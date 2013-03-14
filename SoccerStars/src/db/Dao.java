@@ -51,8 +51,7 @@ public class Dao<T extends Entity> {
 	}
 	
 	public ObjectSet<T> findAll(String orderBy, boolean asc){
-		if (!DB.getDb().equals(clazz))
-			return null;
+
 		Query query = DB.getDb().query();
 		query.constrain(clazz);
 		
@@ -61,7 +60,14 @@ public class Dao<T extends Entity> {
 		else
 			query.descend(orderBy).orderDescending();
 		
-		return query.execute();
+		try{
+			ObjectSet<T> result = query.execute();
+			return result;
+		}catch (NullPointerException nullPointerException){
+			System.out.println("Nenhuma classe encontrada para: " + clazz);
+		}
+			
+		return null;
 	}
 	
 }

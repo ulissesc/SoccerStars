@@ -117,6 +117,8 @@ public class TestDb4Object {
 	@Test
 	public void testComplexQueryPartida(){
 		ObjectSet<Partida> partidas = Partida.dao().findAll("id", false);
+		if (partidas == null)
+			return;
 		for (Partida partida : partidas) {
 			System.out.println("ID: " + partida.getId());
 		}
