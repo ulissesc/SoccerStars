@@ -130,8 +130,10 @@
             		<f:convertDateTime pattern="dd/MMM/yyyy HH:mm:ss"/>
             	</h:outputText>  
         	</p:column>  
-       	 	<p:column headerText="Data/Hora">
-       	 		<a href="#{RAIZ_PROJETO}/partida/#{partida.id}">abrir</a>
+       	 	<p:column style="width: 1px;">
+       	 		<a class="btn btn-small btn-info" href="#{RAIZ_PROJETO}/partida/#{partida.id}" title="Abrir">Abrir</a>
+       	 		<h:outputText value=" | "/>   
+				<h:commandButton styleClass="btn btn-small btn-danger" value="Excluir" title="Excluir" action="#{jogadoresBean.excluirPartida( partida.id )}"/>
        	 	</p:column>
        		</p:dataTable>
        		  

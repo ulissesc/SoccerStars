@@ -77,6 +77,13 @@ public class JogadoresBean {
 		JsfUtil.addSuccessMessage("Jogador excluído.");
 		return null;
 	}
+	
+	public String excluirPartida(Long idPartida){
+		Partida.dao().delete(idPartida);
+		JsfUtil.addSuccessMessage("Partida excluída.");
+		return null;
+	}
+
 
 	public Jogador[] getSelectedJogador() {
 		return selectedJogador;

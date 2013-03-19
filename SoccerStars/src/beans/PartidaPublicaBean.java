@@ -25,5 +25,9 @@ public class PartidaPublicaBean {
 		this.idPartida = idPartida;
 		partida = Partida.dao().load(idPartida);
 	}
+	
+	public void salvarPartida(){
+		Partida.dao().save(partida);
+	}
 	 
 }

@@ -14,6 +14,7 @@ import model.Time;
 public class CriadorDeTimes {
 	
 	private List<Jogador> jogadores;
+	private Partida partida;
 	
 	private HashMap<String, List<Jogador>> gruposPorPosicao = new HashMap<String, List<Jogador>>();
 
@@ -50,7 +51,10 @@ public class CriadorDeTimes {
 	private Partida separarEmTimes(){
 		
 		Time timeA = new Time();
+		timeA.setDescricao("time A");
+		
 		Time timeB = new Time();
+		timeB.setDescricao("time B");
 		
 		boolean comecaTimeA = new Random().nextBoolean();
 		String timeAtual = comecaTimeA ? "A" : "B";
@@ -89,7 +93,10 @@ public class CriadorDeTimes {
 		}
 		
 		
-		Partida partida = new Partida();
+		if (partida == null)
+			partida = new Partida();
+		
+		
 		partida.setTimeA(timeA);
 		partida.setTimeB(timeB);
 		
@@ -115,6 +122,16 @@ public class CriadorDeTimes {
 			return jogadesAux.get(0);
 		
 		return null;
+	}
+
+
+	public Partida getPartida() {
+		return partida;
+	}
+
+
+	public void setPartida(Partida partida) {
+		this.partida = partida;
 	}
 	
 	

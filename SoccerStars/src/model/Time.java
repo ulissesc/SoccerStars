@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Time {
 	
+	private String descricao;
 	private List<Jogador> jogadores = new ArrayList<Jogador>();
 	
 	public void addJogador(Jogador jogador){
@@ -33,6 +34,14 @@ public class Time {
 		}
 		
 		return total ;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

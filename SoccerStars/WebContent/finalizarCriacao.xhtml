@@ -17,19 +17,19 @@
 		
 		<h:form>
 		
-		<fieldset class="form-horizontal">
+		<fieldset>
     	<legend>Dados da Partida</legend>
     	
-    	<div class="input-prepend">
-			<p:outputLabel value="Local" for="local"/>
-			<h:inputText value="#{partidaBean.local}" label="Local" id="local" styleClass="input-xlarge"/>
+    	<div class="controls controls-row">
+			<h:inputText value="#{partidaBean.local}" label="Local" id="local" styleClass="span8"/>
 	    	<p:watermark value="Local" for="local"/>
+    	
+	      	<p:calendar value="#{partidaBean.dataHora}" pattern="dd/MM/yyyy HH:mm" label="Data e Hora" id="dataHora" styleClass="span2"/>
+   		   	<p:watermark value="Data e Hora" for="dataHora"/>
 	    </div>
 	      	
 	    <div class="input-prepend">
-		  	<p:outputLabel value="Data e Hora" for="dataHora"/>
-	      	<p:calendar value="#{partidaBean.dataHora}" pattern="dd/MM/yyyy HH:mm" label="Data e Hora" id="dataHora" styleClass="input-medium"/>
-   		   	<p:watermark value="Data e Hora" for="dataHora"/>
+		  
 		</div>	
 		</fieldset>
 		<br/>
@@ -37,6 +37,7 @@
       	<div class="row">
 		  <div class="span4 text-center">
 			<p:outputPanel id="timeA" >
+			<h:inputText value="#{partidaBean.partida.timeA.descricao}"/>
 			<p:dataTable var="jogador" value="#{partidaBean.partida.timeA.jogadores}" paginator="false">
  				<p:column>  
 		            #{jogador.nomeCapitalizado}  
@@ -58,6 +59,7 @@
 
 		  <div class="span4 text-center">
 		  	<p:outputPanel id="timeB" >
+		  		<h:inputText value="#{partidaBean.partida.timeB.descricao}"/>
 			  	<p:dataTable var="jogador" value="#{partidaBean.partida.timeB.jogadores}" paginator="false">  
 			        <p:column>  
 			            #{jogador.nomeCapitalizado}  

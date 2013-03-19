@@ -13,6 +13,8 @@ public class Partida implements Entity{
 	private Time timeA;
 	private Time timeB;
 	private Long idUsuario;
+	private Integer resultadoTimeA;
+	private Integer resultadoTimeB;
 	
 	public Time getTimeA() {
 		return timeA;
@@ -53,6 +55,18 @@ public class Partida implements Entity{
 	}
 	public void setDataHora(Date dataHora) {
 		this.dataHora = dataHora;
+	}
+	public Integer getResultadoTimeA() {
+		return resultadoTimeA;
+	}
+	public void setResultadoTimeA(Integer resultadoTimeA) {
+		this.resultadoTimeA = resultadoTimeA;
+	}
+	public Integer getResultadoTimeB() {
+		return resultadoTimeB;
+	}
+	public void setResultadoTimeB(Integer resultadoTimeB) {
+		this.resultadoTimeB = resultadoTimeB;
 	}
 
 }

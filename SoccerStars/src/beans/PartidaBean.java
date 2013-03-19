@@ -53,11 +53,11 @@ public class PartidaBean {
 		jogadores.addAll( getPartida().getTimeB().getJogadores() );
 		
 		CriadorDeTimes criadorDeTimes = new CriadorDeTimes(jogadores);
+		criadorDeTimes.setPartida(partida);
 		
-		partida = criadorDeTimes.gerarPartida();
+		/* partida = */criadorDeTimes.gerarPartida();
 		JsfUtil.getSessionMap().put("ultimaPartidaGerada", partida);
 		
-
 		return null;
 	}
 

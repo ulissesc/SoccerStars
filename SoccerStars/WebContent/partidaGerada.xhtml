@@ -19,13 +19,14 @@
 		
 
 		<div class="page-header text-center">
-			<h1><small>local </small><h:outputText value="#{partidaPublicaBean.partida.local}"/></h1>
-  			<h3>
-  			<small>data e hora </small>
-            <h:outputText value="#{partidaPublicaBean.partida.dataHora}">
-       			<f:convertDateTime pattern="dd/MMM/yyyy HH:mm:ss"/>
-       		</h:outputText>
-       		
+			<h1><small>local</small></h1>
+			<h1><h:outputText value="#{partidaPublicaBean.partida.local}"/></h1>
+			
+  			<h3><small>data e hora </small></h3>
+            <h3>
+	            <h:outputText value="#{partidaPublicaBean.partida.dataHora}">
+	       			<f:convertDateTime pattern="dd/MMM/yyyy HH:mm:ss"/>
+	       		</h:outputText>
   			</h3>
 		</div>
 
@@ -34,29 +35,86 @@
       	<div class="row">
 		  <div class="span4 text-center">
 			
-			<p:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeA.jogadores}" paginator="false">  
-		        <p:column>  
-		            #{jogador.nomeCapitalizado}  
-		        </p:column>  
-	        </p:dataTable>
-	        		  
+			<c:if test="#{partidaPublicaBean.partida.resultadoTimeB gt partidaPublicaBean.partida.resultadoTimeA}">
+		  		<div class="alert alert-error">perdedores</div>
+		  	</c:if>
+		  	<c:if test="#{partidaPublicaBean.partida.resultadoTimeA gt partidaPublicaBean.partida.resultadoTimeB}">
+		  		<div class="alert alert-success">ganhadores</div>
+		  	</c:if>
+			
+			<h3><h:outputText value="#{partidaPublicaBean.partida.timeA.descricao}"/></h3>
+			<h1><i><h:outputText value="#{partidaPublicaBean.partida.resultadoTimeA}"/></i></h1>
+			
+			<h:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeA.jogadores}" styleClass="table table-hover">
+				<h:column>
+					<f:facet name="header">
+					jogador
+					</f:facet>
+					<h:outputText value="#{jogador.nomeCapitalizado}"/>
+				</h:column>
+			</h:dataTable>
+			
 		  </div>
 
-		  <div class="span2 text-center"><h1><i>vs</i></h1></div>
+		  <div class="span2 text-center">
+		  	
+		  	<h1><i>vs</i></h1>
+		  	
+		  </div>
 
 		  <div class="span4 text-center">
-		  	<p:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeB.jogadores}" paginator="false">  
-		        <p:column >  
-		            #{jogador.nomeCapitalizado}  
-		        </p:column>  
-	        </p:dataTable>
+		  
+		  	<c:if test="#{partidaPublicaBean.partida.resultadoTimeA gt partidaPublicaBean.partida.resultadoTimeB}">
+		  		<div class="alert alert-error">perdedores</div>
+		  	</c:if>
+		  	<c:if test="#{partidaPublicaBean.partida.resultadoTimeB gt partidaPublicaBean.partida.resultadoTimeA}">
+		  		<div class="alert alert-success">ganhadores</div>
+		  	</c:if>
+		  	
+		  	<h3><h:outputText value="#{partidaPublicaBean.partida.timeB.descricao}"/></h3>
+		  	<h1><i><h:outputText value="#{partidaPublicaBean.partida.resultadoTimeB}"/></i></h1>
+		  	
+		  	
+		  	<h:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeB.jogadores}" styleClass="table table-hover">
+				<h:column>
+					<f:facet name="header">
+					jogador
+					</f:facet>
+					<h:outputText value="#{jogador.nomeCapitalizado}"/>
+				</h:column>
+			</h:dataTable>
+		  
 		  </div>
 		</div>
 		
+		<div class="text-center">
+			<c:if test="#{not empty loginBean.usuarioLogado and (partidaPublicaBean.partida.idUsuario eq loginBean.usuarioLogado.id) }">
+	        	<a class="btn btn-success" href="javascript:resultadoWG.show()">Informar Resultado Final</a>
+	        </c:if>
+        </div>
+		
+		<p:dialog modal="true" header="Informe o resultado final" widgetVar="resultadoWG" 
+			rendered="#{not empty loginBean.usuarioLogado and (partidaPublicaBean.partida.idUsuario eq loginBean.usuarioLogado.id) }">
+			<h:panelGrid columns="3">
+				<h:inputText value="#{partidaPublicaBean.partida.resultadoTimeA}" size="6" label="Resultado time A"/>
+				<h:outputText value="&#160; X &#160;"/>
+				<h:inputText value="#{partidaPublicaBean.partida.resultadoTimeB}" size="6" label="Resultado time B"/>
+			</h:panelGrid>
+			<h:commandButton value="Aplicar" styleClass="btn btn-large btn-success btn-block" 
+				action="#{partidaPublicaBean.salvarPartida}"/>
+		</p:dialog>
+		
 		</h:form>
 	
-		<a name="fb_share"></a>
-		<script src="https://facebook.com/connect.php/js/FB.Share" type="text/javascript"></script>
+		<a id="share_facebook" target="_blank" href="#share">
+			<IMG alt="" src="http://leosoft.com.br/images/estrutura/icon-facebook.gif" border="0"/>
+			Compartilhar
+		</a>
+		<script type="text/javascript">
+			jQuery(function() {
+				jQuery("#share_facebook").attr("href", "https://www.facebook.com/sharer.php?u="+document.location.href);
+			});
+		</script>
 		
 	</ui:define>
 	
