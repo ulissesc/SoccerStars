@@ -48,7 +48,7 @@
 			<h:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeA.jogadores}" styleClass="table table-hover">
 				<h:column>
 					<f:facet name="header">
-					jogador
+					jogadores
 					</f:facet>
 					<h:outputText value="#{jogador.nomeCapitalizado}"/>
 				</h:column>
@@ -74,11 +74,10 @@
 		  	<h3><h:outputText value="#{partidaPublicaBean.partida.timeB.descricao}"/></h3>
 		  	<h1><i><h:outputText value="#{partidaPublicaBean.partida.resultadoTimeB}"/></i></h1>
 		  	
-		  	
 		  	<h:dataTable var="jogador" value="#{partidaPublicaBean.partida.timeB.jogadores}" styleClass="table table-hover">
 				<h:column>
 					<f:facet name="header">
-					jogador
+					jogadores
 					</f:facet>
 					<h:outputText value="#{jogador.nomeCapitalizado}"/>
 				</h:column>

@@ -1,5 +1,6 @@
 package security;
 
+import model.Usuario;
 import utils.JsfUtil;
 
 
@@ -12,4 +13,21 @@ public class SecurityContext {
 		return idUsuario;
 	}
 	
+	public static Usuario getUsuario(){
+		if (getIdUsuario() != null)
+			return Usuario.dao().load(getIdUsuario());
+		return null;
+	}
+	
+	public static boolean isUsuarioAdmin(){
+		Usuario usuarioLogado = getUsuario();
+		return isUsuarioAdmin(usuarioLogado);
+	}
+	
+	public static boolean isUsuarioAdmin(Usuario usuarioLogado){
+		if (usuarioLogado != null){
+			return "torquatro@gmail.com".equals(usuarioLogado.getEmail());
+		}
+		return false;
+	}
 }

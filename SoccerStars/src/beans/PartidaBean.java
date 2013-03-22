@@ -76,4 +76,14 @@ public class PartidaBean {
 	public void setLocal(String local) {
 		this.local = local;
 	}
+	public void mudurDeTime(String time, Jogador jogador){
+		if ("A".equals( time )){
+			getPartida().getTimeA().getJogadores().remove(jogador);
+			getPartida().getTimeB().getJogadores().add(jogador);
+		}else{
+			getPartida().getTimeB().getJogadores().remove(jogador);
+			getPartida().getTimeA().getJogadores().add(jogador);
+		}
+		
+	}
 }

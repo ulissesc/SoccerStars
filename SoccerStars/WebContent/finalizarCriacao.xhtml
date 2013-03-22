@@ -15,7 +15,7 @@
 
 	<ui:define name="corpo">
 		
-		<h:form>
+		<h:form id="partidaForm">
 		
 		<fieldset>
     	<legend>Dados da Partida</legend>
@@ -24,7 +24,7 @@
 			<h:inputText value="#{partidaBean.local}" label="Local" id="local" styleClass="span8"/>
 	    	<p:watermark value="Local" for="local"/>
     	
-	      	<p:calendar value="#{partidaBean.dataHora}" pattern="dd/MM/yyyy HH:mm" label="Data e Hora" id="dataHora" styleClass="span2"/>
+	      	<p:calendar value="#{partidaBean.dataHora}" pattern="dd/MM/yyyy HH:mm" timeZone="GMT-03:00" label="Data e Hora" id="dataHora" styleClass="span2"/>
    		   	<p:watermark value="Data e Hora" for="dataHora"/>
 	    </div>
 	      	
@@ -38,10 +38,18 @@
 		  <div class="span4 text-center">
 			<p:outputPanel id="timeA" >
 			<h:inputText value="#{partidaBean.partida.timeA.descricao}"/>
+			
 			<p:dataTable var="jogador" value="#{partidaBean.partida.timeA.jogadores}" paginator="false">
  				<p:column>  
 		            #{jogador.nomeCapitalizado}  
 		        </p:column>  
+		    
+		        <p:column style="width: 1px">
+		        	<h:commandButton styleClass="btn btn-mini" value="&gt;&gt;" title="Mudar jogador de time" action="#{partidaBean.mudurDeTime('A', jogador)}">
+		        		<p:ajax process="@form" update=":partidaForm:timeA :partidaForm:timeB"/>
+		        	</h:commandButton>
+		        </p:column>
+		          
 	        </p:dataTable>
 	        
 	        <h3>
@@ -61,9 +69,17 @@
 		  	<p:outputPanel id="timeB" >
 		  		<h:inputText value="#{partidaBean.partida.timeB.descricao}"/>
 			  	<p:dataTable var="jogador" value="#{partidaBean.partida.timeB.jogadores}" paginator="false">  
+			        
+			        <p:column style="width: 1px">
+			        	<h:commandButton styleClass="btn btn-mini"  value="&lt;&lt;" title="Mudar jogador de time" action="#{partidaBean.mudurDeTime('B', jogador)}">
+			        		<p:ajax process="@form" update=":partidaForm:timeA :partidaForm:timeB"/>
+			        	</h:commandButton>
+			        </p:column>
+			        
 			        <p:column>  
 			            #{jogador.nomeCapitalizado}  
-			        </p:column>  
+			        </p:column>
+			          
 		        </p:dataTable>
 	        </p:outputPanel>
 	        

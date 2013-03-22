@@ -30,6 +30,7 @@
 		        		<f:selectItem itemValue="D" itemLabel="Defesa"/>
 		        		<f:selectItem itemValue="M" itemLabel="Meia"/>
 		        		<f:selectItem itemValue="A" itemLabel="Ataque"/>
+		        		<f:selectItem itemValue="G" itemLabel="Goleiro"/>
 		        	</h:selectOneMenu>
 		        	<h:message for="posicao"/>
 				</div>
@@ -106,6 +107,7 @@
         	<h:outputText value="A" title="Ataque" rendered="#{jogador.posicao eq 'A'}" styleClass="badge badge-success"/>
         	<h:outputText value="M" title="Meia" rendered="#{jogador.posicao eq 'M'}" styleClass="badge"/>
         	<h:outputText value="D" title="Defesa" rendered="#{jogador.posicao eq 'D'}" styleClass="badge badge-warning"/>
+        	<h:outputText value="G" title="Goleiro" rendered="#{jogador.posicao eq 'G'}" styleClass="badge badge-important"/>
         </p:column>
       
         <p:column headerText="Editar" style="width: 1px;">  
@@ -119,11 +121,11 @@
         </p:dataTable>
         
         
-        <p:dialog header="Partidas geradas" modal="true" widgetVar="partidasGeradasWG" width="400">
+        <p:dialog header="Partidas geradas" modal="true" widgetVar="partidasGeradasWG" >
         	<p:dataTable id="partidasGeradas" var="partida" value="#{jogadoresBean.partidasGeradas}" rows="5">
        	 	
        	 	<p:column headerText="Local">  
-            	<h:outputText value="#{empty partida.local ? ' -- ' : partida.local}"/>  
+            	<h:outputText value="#{empty partida.local ? ' - sem local - ' : partida.local}"/>  
         	</p:column>
         	<p:column headerText="Data/Hora">  
             	<h:outputText value="#{partida.dataHora}">

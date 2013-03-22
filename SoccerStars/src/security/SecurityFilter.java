@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Usuario;
 import db.DB;
 
 
@@ -34,14 +35,23 @@ public class SecurityFilter implements Filter {
 		
 		final String uri = httpServletRequest.getRequestURI();
 		final Long idUsuarioLogado = (Long) httpServletRequest.getSession().getAttribute(SecurityContext.ID_USUARIO_LOGADO);
-
+		final Usuario usuario = idUsuarioLogado != null ? Usuario.dao().load(idUsuarioLogado) : null;
+		
 		if (ENABLE) {
-			// is session invalid?
-			if (isSessionInvalid(httpServletRequest) || idUsuarioLogado == null) {
-				if (isPrivatedUrl(uri)){
-					permNegada(httpServletRequest, httpServletResponse);
-					return;
-				}
+			
+			if (isSessionInvalid(httpServletRequest)){
+				permNegada(httpServletRequest, httpServletResponse);
+				return;
+			}
+				
+			
+			if (isPrivatedUrl(uri) && idUsuarioLogado == null){
+				permNegada(httpServletRequest, httpServletResponse);
+				return;
+			}
+			if (isAdminUrl(uri) && !SecurityContext.isUsuarioAdmin( usuario )){
+				permNegada(httpServletRequest, httpServletResponse);
+				return;
 			}
 			
 		}
@@ -67,6 +77,21 @@ public class SecurityFilter implements Filter {
 		return sessionInValid;
 	}
 
+	
+	private boolean isAdminUrl(String url){
+		String privateUrls[] = new String[]{
+			"admin.jsf",
+			"admin"
+		};
+		
+		for(String urlPrivate  : privateUrls){
+			if (url.contains(urlPrivate))
+				return true;
+		}
+		
+		return false;
+	}
+	
 	private boolean isPrivatedUrl(String url){
 		String privateUrls[] = new String[]{
 			"criarPartida.jsf",

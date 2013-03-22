@@ -66,12 +66,7 @@ public class LoginBean {
 	}
 	
 	public Usuario getUsuarioLogado(){
-		
-		Long idUsuario = (Long) JsfUtil.getSessionMap().get(SecurityContext.ID_USUARIO_LOGADO);
-		if (idUsuario != null)
-			return Usuario.dao().load(idUsuario);
-		
-		return null;
+		return SecurityContext.getUsuario();
 	}
 
 	public List<Partida> getUltimasPartidas(){
