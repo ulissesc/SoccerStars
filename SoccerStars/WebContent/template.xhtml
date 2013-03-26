@@ -135,15 +135,21 @@
         <div class="navbar">
           <div class="navbar-inner">
               <ul class="nav">
-                <li class="#{ ativePage eq 'home' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/">Inicio</a></li>
-                <li class="#{ ativePage eq 'criarTimes' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/criarPartida">Criar Times</a></li>
-                <li class="#{ ativePage eq 'sobre' ? 'active' : ''}"><a href="#{RAIZ_PROJETO}/sobre">Sobre</a></li>
+                <li class="#{ ativePage eq 'home' ? 'active' : ''}">
+                	<a href="#{RAIZ_PROJETO}/" >Inicio</a>
+                </li>
+                <li class="#{ ativePage eq 'criarTimes' ? 'active' : ''}">
+                	<a href="#{RAIZ_PROJETO}/criarPartida">Criar Times</a>
+                </li>
+                <li class="#{ ativePage eq 'sobre' ? 'active' : ''}">
+                	<a href="#{RAIZ_PROJETO}/sobre">Sobre</a>
+                </li>
               </ul>
           </div>
         </div><!-- /.navbar -->
       </div>
       
-      <p:dialog modal="true" widgetVar="loginDialog" header="Entrar" width="360">
+      <p:dialog modal="true" widgetVar="loginDialog" header="Entrar">
       
        <div class="form-actions">
 	        <h:form styleClass="form-signin">
@@ -159,7 +165,8 @@
 		        <br/>
 		        <h:commandButton value="Entrar" styleClass="btn btn-large btn-info btn-block" action="#{loginBean.logar}">
 		        </h:commandButton>
-	        	
+	        	 <input type="button" value="Cancelar" onclick="loginDialog.hide()"  class="btn btn-large btn-block">
+		        </input>
 	        </h:form>
 	     </div>
       </p:dialog>

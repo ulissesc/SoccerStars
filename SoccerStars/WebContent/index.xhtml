@@ -18,7 +18,10 @@
 	
       <!-- Jumbotron -->
       <div class="jumbotron">
-        <h1>SoccerStars</h1>
+        
+        <h1 class="hidden-phone">SoccerStars</h1>
+        <h2 class="hidden-desktop">SoccerStars</h2>
+        
         <p class="lead">a forma mais simples de criar times para suas peladas</p>
         
         <c:if test="#{not empty loginBean.usuarioLogado}">
@@ -46,7 +49,7 @@
 		
 
  
- <p:dialog modal="true" widgetVar="cadastroDialog" header="Cadastre-se" width="360">
+ <p:dialog modal="true" widgetVar="cadastroDialog" header="Cadastre-se" >
      
 				<h:form>
 
@@ -65,9 +68,11 @@
 		        	<p:watermark value="Senha" for="senha"/>
 		        	<h:message for="senha"/>
 
-
+				
  				<h:commandButton value="Criar usuário" styleClass="btn btn-large btn-success btn-block" action="#{loginBean.criarUsuario}">
 		        </h:commandButton>
+		        <input type="button" value="Cancelar" onclick="cadastroDialog.hide()"  class="btn btn-large btn-block">
+		        </input>
 		        
 				</h:form>
  </p:dialog>
