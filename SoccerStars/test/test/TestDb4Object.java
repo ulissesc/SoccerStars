@@ -5,6 +5,7 @@ import model.Atributos;
 import model.Jogador;
 import model.Partida;
 import model.Time;
+import model.Usuario;
 
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -135,6 +136,13 @@ public class TestDb4Object {
 			Jogador jogadorFromDB = (Jogador) DB.getDb().ext().getByID(id);
 			System.out.println("NOME: " + jogadorFromDB.getNome());
 		}
+		
+	}
+	
+	@Test
+	public void loadWithNullId(){
+		Usuario load = Usuario.dao().load(null);
+		org.junit.Assert.assertNull(load);
 		
 	}
 	

@@ -18,7 +18,7 @@
 		  <h1>Admin</h1>
 		</div>
 		
-		 
+	<h:form>
 		<p:dataTable id="usuarios" var="usuario" widgetVar="usuariosWG" value="#{adminBean.todosOsUsuarios}">  
   		
   		<p:column headerText="ID" >  
@@ -30,8 +30,12 @@
             <br/>
             <i><h:outputText value="#{usuario.email}" /></i> 
         </p:column>  
+         <p:column>
+         	<h:commandButton value="Excluir" styleClass="btn" action="#{adminBean.excluirUsuario(usuario)}"/>
+         </p:column>
         
         </p:dataTable>
+	</h:form>
 	
 	</ui:define>
 	

@@ -1,6 +1,7 @@
 package db;
 
 import com.db4o.ObjectSet;
+import com.db4o.query.Predicate;
 import com.db4o.query.Query;
 
 public class Dao<T extends Entity> {
@@ -18,21 +19,37 @@ public class Dao<T extends Entity> {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	public T load(Long id) {
-		T t;
-		try {
-			t = (T) clazz.newInstance();
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
-		}  
-		t.setId(id);
-		ObjectSet<Object> queryByExample = DB.getDb().queryByExample(t);
-		if (queryByExample.size() > 0)
-			return (T) queryByExample.get(0);
+	public T load(final Long id){
+
+		if (id == null)
+			return null;
 		
+		DB.getDb().query(new Predicate<T>() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public boolean match(T object) {
+				return id.equals(object.getId());
+			}
+		});
+	
 		return null;
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	public T load(Long id) {
+//		T t;
+//		try {
+//			t = (T) clazz.newInstance();
+//		} catch (Throwable e) {
+//			throw new RuntimeException(e);
+//		}  
+//		t.setId(id);
+//		ObjectSet<Object> queryByExample = DB.getDb().queryByExample(t);
+//		if (queryByExample.size() > 0)
+//			return (T) queryByExample.get(0);
+//		
+//		return null;
+//	}
 	
 	public ObjectSet<T> findAll(){
 		ObjectSet<T> queryByExample = DB.getDb().queryByExample(clazz);
@@ -46,8 +63,12 @@ public class Dao<T extends Entity> {
 	
 	public void delete(Long id){
 		T loaded = load(id);
-		if (loaded != null)
-			DB.getDb().delete(loaded);
+		delete(loaded);
+	}
+	
+	public void delete(T object){
+		if (object != null)
+			DB.getDb().delete(object);
 	}
 	
 	public ObjectSet<T> findAll(String orderBy, boolean asc){
