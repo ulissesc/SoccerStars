@@ -1,7 +1,6 @@
 package db;
 
 import com.db4o.ObjectSet;
-import com.db4o.query.Predicate;
 import com.db4o.query.Query;
 
 public class Dao<T extends Entity> {
@@ -19,18 +18,26 @@ public class Dao<T extends Entity> {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public T load(final Long id){
 
 		if (id == null)
 			return null;
+		Query query = DB.getDb().query();
+		query.constrain(clazz);
+		query.descend("id").constrain(id);
+		ObjectSet<Object> objectSet = query.execute();
+		if (objectSet.size() > 0)
+			return (T) objectSet.get(0);
 		
-		DB.getDb().query(new Predicate<T>() {
-			private static final long serialVersionUID = 1L;
-			@Override
-			public boolean match(T object) {
-				return id.equals(object.getId());
-			}
-		});
+//		DB.getDb().query(new Predicate<T>() {
+//			private static final long serialVersionUID = 1L;
+//			
+//			@Override
+//			public boolean match(T object) {
+//				return id.equals(object.getId());
+//			}
+//		});
 	
 		return null;
 	}
