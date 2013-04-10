@@ -110,7 +110,6 @@ public class CriadorDeTimes {
 		jogadesAux.addAll(jogadores);
 		
 		Collections.sort(jogadesAux, new Comparator<Jogador>() {
-			@Override
 			public int compare(Jogador o1, Jogador o2) {
 				Long media2 = Math.round( o2.getMedia());
 				Long media1 = Math.round( o2.getMedia());

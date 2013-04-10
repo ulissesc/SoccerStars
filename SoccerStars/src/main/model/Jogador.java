@@ -2,10 +2,11 @@ package main.model;
 
 import java.util.Comparator;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import main.db.Entity;
 import main.db.dao.JogadorDao;
+
+import com.sun.xml.internal.ws.util.StringUtils;
+ 
 
 public class Jogador implements Comparator<Jogador>, Entity{
 	
@@ -69,7 +70,6 @@ public class Jogador implements Comparator<Jogador>, Entity{
 		return (int) Math.round( getMedia() );
 	}
 	
-	@Override
 	public int compare(Jogador o1, Jogador o2) {
 		return o1.getNome().compareTo(o2.getNome());
 	}

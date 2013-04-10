@@ -27,7 +27,6 @@ public class JogadorDataModel extends ListDataModel<Jogador> implements Selectab
 		return jogadores;
 	}
 	
-	@Override
 	public Jogador getRowData(String rowKey) {
 		
 		Long idJogador = Long.parseLong(rowKey);
@@ -42,7 +41,6 @@ public class JogadorDataModel extends ListDataModel<Jogador> implements Selectab
 	}
 	
 
-	@Override
 	public Object getRowKey(Jogador jogador) {
 		return jogador.getId();
 	}

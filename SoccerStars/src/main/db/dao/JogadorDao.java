@@ -26,7 +26,6 @@ public class JogadorDao extends Dao<Jogador> {
 			}
 		
 		}, new Comparator<Jogador>() {
-			@Override
 			public int compare(Jogador o1, Jogador o2) {
 				
 				final String nome1 = String.valueOf( o1.getNome() ).toLowerCase();

@@ -14,10 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter("/*")
 public class EncodeFilter implements Filter{
 
-	@Override
 	public void destroy() {  }
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if (request instanceof HttpServletRequest){
 			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
@@ -30,7 +28,6 @@ public class EncodeFilter implements Filter{
         chain.doFilter(request, response);
 	}
 
-	@Override
 	public void init(FilterConfig arg0) throws ServletException { }
 
 }
