@@ -19,6 +19,10 @@
 		</div>
 		
 	<h:form>
+	
+		<p:commandButton value="Baixar Banco" action="#{adminBean.baixarBanco}" ajax="false"/>
+		<br/>
+	
 		<p:dataTable id="usuarios" var="usuario" widgetVar="usuariosWG" value="#{adminBean.todosOsUsuarios}">  
   		
   		<p:column headerText="ID" >  

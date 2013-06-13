@@ -7,16 +7,21 @@ import com.db4o.ObjectContainer;
 
 public class DB {
 
-	private static final String DB_FILE;
+	public static final String DB_FILE;
 	
 	private static final ObjectContainer db;
 
-	static{
+	public static String getDBPath(){
 		String dbDir = System.getProperty("user.home")+ File.separator + "banco";
-		if (!new File(dbDir).exists())
-			new File(dbDir).mkdirs();
+		return dbDir;
+	}
+	
+	static{
 		
-		DB_FILE = dbDir + File.separator + "soccer.db";
+		if (!new File(getDBPath()).exists())
+			new File(getDBPath()).mkdirs();
+		
+		DB_FILE = getDBPath() + File.separator + "soccer.db";
 		
 		db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), DB_FILE);
 //		db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "/Users/torquatro/Documents/Desenvolvimento/teste.db");
